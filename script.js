@@ -1,28 +1,13 @@
-function apiArtist(){
-    fetch('https://kt2ul4cwza.execute-api.us-east-2.amazonaws.com/public/songs/gorillaz')
-    .then((response) => response.json())
-    .then((data) => {
+const characterList = document.getElementById('character-list-sesion');
 
-        for (let i = 0; i < data.length; i++) {
+const item = document.createElement('li');
+item.setAttribute('class', 'item-artist-sesion');
+characterList.appendChild(item);
 
-            const characterList = document.getElementById('character-list-sesion');
-    
-            const item = document.createElement('li');
-            item.setAttribute('class', 'item-artist-sesion');
-            characterList.appendChild(item);
-    
-            const audio = document.createElement('audio');
-            audio.setAttribute('src', `${data[i].audio}`);
-            audio.setAttribute('id', 'music');
-            item.appendChild(audio);
-            console.log(`${data[i].audio}`)
-        }
-    });
-}
-
-/*traer el audio */
-let music = document.querySelectorAll('#music audio src');
-console.log("soy music",music)
+const musicSong = document.createElement("audio");
+musicSong.src = "https://manzdev.github.io/codevember2017/assets/eye-tiger.mp3";
+item.appendChild(musicSong);
+item.innerText = musicSong.src;
 
 var holding = false;
 var track = document.getElementById('track');
@@ -33,33 +18,13 @@ var prev = document.getElementById('prev');
 var current_track = 0;
 var song, audio, duration;
 var playing = false;
-var songs = [
-    {
-        url: "https://cetav.s3.us-east-2.amazonaws.com/rhinestone-eyes.mp3"
-    },
-    {
-        url: "https://cetav.s3.us-east-2.amazonaws.com/kansas.mp3"
-    },
-    {
-        url: "https://cetav.s3.us-east-2.amazonaws.com/momentary-bliss.mp3"
-    },
-    {
-        url: "https://cetav.s3.us-east-2.amazonaws.com/feel-good-inc.mp3"
-    },
-    {
-        url: "https://cetav.s3.us-east-2.amazonaws.com/shes-my-collar.mp3"
-    },
-    {
-        url: "https://cetav.s3.us-east-2.amazonaws.com/19-2000.mp3"
-    }
-];
 
 window.addEventListener('load', init(), false);
 
 function init() {
-    song = songs[current_track];
+    song = musicSong[current_track];
     audio = new Audio();
-    audio.src = song.url;
+    audio.src = musicSong.src;
 }
 
 
@@ -122,16 +87,14 @@ function seekTrack(e) {
 }
 function nextTrack() {
     current_track++;
-    current_track = current_track % (songs.length);
-    song = songs[current_track];
-    audio.src = song.url;
+    current_track = current_track % (musicSong.length);
+    song = musicSong[current_track];
+    audio.src = musicSong.src;
 }
 
 function prevTrack() {
     current_track--;
-    current_track = (current_track == -1 ? (songs.length - 1) : current_track);
-    song = songs[current_track];
-    audio.src = song.url;
+    current_track = (current_track == -1 ? (musicSong.length - 1) : current_track);
+    song = musicSong[current_track];
+    audio.src = musicSong.src;
 }
-
-apiArtist();
