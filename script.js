@@ -5,6 +5,7 @@ item.setAttribute('class', 'item-artist-sesion');
 characterList.appendChild(item);
 
 const musicSong = document.createElement("audio");
+musicSong.setAttribute('crossorigin','anonymous');
 musicSong.src = "https://manzdev.github.io/codevember2017/assets/eye-tiger.mp3";
 item.appendChild(musicSong);
 item.innerText = musicSong.src;
@@ -29,19 +30,10 @@ function init() {
 
 
 audio.addEventListener('timeupdate', updateTrack, false);
+
 audio.addEventListener('loadedmetadata', function () {
     duration = this.duration;
 }, false);
-
-window.onmousemove = function (e) {
-    e.preventDefault();
-    if (holding) seekTrack(e);
-}
-
-window.onmouseup = function (e) {
-    holding = false;
-    console.log(holding);
-}
 
 track.onmousedown = function (e) {
     holding = true;
