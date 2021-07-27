@@ -1,15 +1,10 @@
-fetch('https://kt2ul4cwza.execute-api.us-east-2.amazonaws.com/public/song/rad001')
-.then((response) => response.json())
-.then((data) => {
-  const characterList = document.getElementById('character-list-sesion');
+const song1 = 'https://kt2ul4cwza.execute-api.us-east-2.amazonaws.com/public/song/rad001';
 
-  const item = document.createElement('li');
-  item.setAttribute('class', 'item-artist-sesion');
-  characterList.appendChild(item);
+async function prueba(song1){
+  const resultado = await fetch(song1)
+  .then((response) => response.json())
+  .then((data) =>  data);
+    return resultado;
+}
 
-  const musicSong = document.createElement("audio");
-  musicSong.setAttribute('crossorigin','anonymous');
-  musicSong.setAttribute('src',`${data.audio}`);
-  item.appendChild(musicSong);
-  item.innerText = musicSong.src;
-});
+export{song1, prueba} ;
